@@ -1,0 +1,23 @@
+plugins {
+    id 'java'
+    id 'org.beryx.jlink' version '3.0.1'
+}
+
+jar {
+    manifest {
+        attributes(
+                'Main-Class': 'com.brackett.Main'
+        )
+    }
+}
+
+application {
+    mainClass='com.brackett.Main'
+    mainModule='card.game.sim.main'
+}
+
+jlink {
+    launcher {
+        name='card-game-sim'
+    }
+}
