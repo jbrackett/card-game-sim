@@ -116,22 +116,30 @@ public class Main {
     }
 
     public static void main(String[] args) {
+        try(var in = new Scanner(System.in)) {
 
-        var p1 = new Player("Josh", new ArrayList<>());
-        var p2 = new Player("Ben", new ArrayList<>());
+            System.out.println("Enter player 1 name: ");
+            var p1 = new Player(in.next(), new ArrayList<>());
 
-        var winners = new ArrayList<Player>();
-        var game = new Game(List.of(p1, p2));
-        for (int i = 0; i < 4; i++) {
-            game.start();
-            game.exchange(p1);
-            game.exchange(p2);
-            var winner = game.declareWinner();
-            System.out.println(winner.name + " won!");
-            winners.add(winner);
-            game.reset();
+            System.out.println("Enter player 2 name: ");
+            var p2 = new Player(in.next(), new ArrayList<>());
+
+            var winners = new ArrayList<Player>();
+            var game = new Game(List.of(p1, p2));
+
+            System.out.println("How many rounds do you want to play: ");
+            var rounds = in.nextInt();
+            for (int i = 0; i < rounds; i++) {
+                game.start();
+                game.exchange(p1);
+                game.exchange(p2);
+                var winner = game.declareWinner();
+                System.out.println(winner.name + " won!");
+                winners.add(winner);
+                game.reset();
+            }
+
+            winners.forEach(System.out::println);
         }
-
-        winners.forEach(System.out::println);
     }
 }
